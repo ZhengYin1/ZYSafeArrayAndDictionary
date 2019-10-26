@@ -1,0 +1,6 @@
+use_frameworks!
+target 'ZYSafeArrayAndDictionary_Tests' do
+  pod 'ZYSafeArrayAndDictionary', :path => '../'
+  
+  
+end
