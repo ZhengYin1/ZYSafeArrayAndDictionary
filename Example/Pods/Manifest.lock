@@ -1,0 +1,16 @@
+PODS:
+  - ZYSafeArrayAndDictionary (0.1.0)
+
+DEPENDENCIES:
+  - ZYSafeArrayAndDictionary (from `../`)
+
+EXTERNAL SOURCES:
+  ZYSafeArrayAndDictionary:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ZYSafeArrayAndDictionary: 07ba000895825324f760b9302309ecd477aaf714
+
+PODFILE CHECKSUM: 70855a10deced53f8d513bf61efabd566cf8ac4a
+
+COCOAPODS: 1.8.4

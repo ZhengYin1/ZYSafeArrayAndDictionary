@@ -1,0 +1,6 @@
+framework module ZYSafeArrayAndDictionary {
+  umbrella header "ZYSafeArrayAndDictionary-umbrella.h"
+
+  export *
+  module * { export * }
+}
