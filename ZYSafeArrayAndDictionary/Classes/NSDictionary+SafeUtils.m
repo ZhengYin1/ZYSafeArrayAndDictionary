@@ -8,7 +8,6 @@
 
 #import "NSDictionary+SafeUtils.h"
 #import "NSObject+SafeSwizzle.h"
-#import "MJYPSafeUtilsManager.h"
 #import <objc/runtime.h>
 
 @implementation NSDictionary (SafeUtils)
@@ -30,11 +29,11 @@
         id key = keys[i];
         id obj = objects[i];
         if (!key) {
-            MJYPAssert(key, ([NSString stringWithFormat:@"attempt to insert nil key from key[%lu]", (unsigned long)i]));
+            NSAssert(key, ([NSString stringWithFormat:@"attempt to insert nil key from key[%lu]", (unsigned long)i]));
             continue;
         }
         if (!obj) {
-            MJYPAssert(obj, ([NSString stringWithFormat:@"attempt to insert nil object from objects[%lu]", (unsigned long)i]));
+            NSAssert(obj, ([NSString stringWithFormat:@"attempt to insert nil object from objects[%lu]", (unsigned long)i]));
             continue;
         }
         safeKeys[j] = key;
@@ -52,11 +51,11 @@
         id key = keys[i];
         id obj = objects[i];
         if (!key) {
-            MJYPAssert(key, ([NSString stringWithFormat:@"attempt to insert nil key from key[%lu]", (unsigned long)i]));
+            NSAssert(key, ([NSString stringWithFormat:@"attempt to insert nil key from key[%lu]", (unsigned long)i]));
             continue;
         }
         if (!obj) {
-            MJYPAssert(obj, ([NSString stringWithFormat:@"attempt to insert nil object from objects[%lu]", (unsigned long)i]));
+            NSAssert(obj, ([NSString stringWithFormat:@"attempt to insert nil object from objects[%lu]", (unsigned long)i]));
             continue;
         }
         safeKeys[j] = key;
@@ -81,8 +80,8 @@
 }
 
 - (void)mjyp_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
-    MJYPAssert(anObject, ([NSString stringWithFormat:@"object cannot be nil (key = %@)", aKey]));
-    MJYPAssert(aKey, ([NSString stringWithFormat:@"key cannot be nil (object = %@)", anObject]));
+    NSAssert(anObject, ([NSString stringWithFormat:@"object cannot be nil (key = %@)", aKey]));
+    NSAssert(aKey, ([NSString stringWithFormat:@"key cannot be nil (object = %@)", anObject]));
     
     if (anObject && aKey) {
         [self mjyp_setObject:anObject forKey:aKey];
@@ -90,7 +89,7 @@
 }
 
 - (void)mjyp_setObject:(id)obj forKeyedSubscript:(id<NSCopying>)key {
-    MJYPAssert(key, ([NSString stringWithFormat:@"key cannot be nil (object = %@)", obj]));
+    NSAssert(key, ([NSString stringWithFormat:@"key cannot be nil (object = %@)", obj]));
     
     if (obj && key) {
         [self mjyp_setObject:obj forKeyedSubscript:key];
@@ -98,7 +97,7 @@
 }
 
 - (void)mjyp_removeObjectForKey:(id)aKey {
-    MJYPAssert(aKey, @"key cannot be nil");
+    NSAssert(aKey, @"key cannot be nil");
     
     if (aKey) {
         [self mjyp_removeObjectForKey:aKey];

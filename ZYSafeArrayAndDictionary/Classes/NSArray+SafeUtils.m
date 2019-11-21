@@ -8,23 +8,22 @@
 
 #import "NSArray+SafeUtils.h"
 #import "NSObject+SafeSwizzle.h"
-#import "MJYPSafeUtilsManager.h"
 #import <objc/runtime.h>
 
 @implementation NSArray (SafeUtils)
 
 #define ArrayObjectAtIndexProtect(arrayName) \
 - (id)mjyp_##arrayName##_objectAtIndex:(NSUInteger)index {\
-    MJYPAssert([self count] > 0,      ([NSString stringWithFormat:@"index %lu beyond bounds for empty array", (unsigned long)index]));\
-    MJYPAssert(index < [self count],  ([NSString stringWithFormat:@"index %lu beyond bounds [0...%lu]", (unsigned long)index, (unsigned long)[self count] - 1]));\
+    NSAssert([self count] > 0,      ([NSString stringWithFormat:@"index %lu beyond bounds for empty array", (unsigned long)index]));\
+    NSAssert(index < [self count],  ([NSString stringWithFormat:@"index %lu beyond bounds [0...%lu]", (unsigned long)index, (unsigned long)[self count] - 1]));\
     if (index < self.count) {\
         return [self mjyp_##arrayName##_objectAtIndex:index];\
     }\
     return nil;\
 }\
 - (id)mjyp_##arrayName##_objectAtIndexedSubscript:(NSUInteger)index {\
-    MJYPAssert([self count] > 0,      ([NSString stringWithFormat:@"index %lu beyond bounds for empty array", (unsigned long)index]));\
-    MJYPAssert(index < [self count],  ([NSString stringWithFormat:@"index %lu beyond bounds [0...%lu]", (unsigned long)index, (unsigned long)[self count] - 1]));\
+    NSAssert([self count] > 0,      ([NSString stringWithFormat:@"index %lu beyond bounds for empty array", (unsigned long)index]));\
+    NSAssert(index < [self count],  ([NSString stringWithFormat:@"index %lu beyond bounds [0...%lu]", (unsigned long)index, (unsigned long)[self count] - 1]));\
     if (index < self.count) {\
         return [self mjyp_##arrayName##_objectAtIndexedSubscript:index];\
     }\
@@ -63,7 +62,7 @@ ArrayObjectAtIndexProtect(__NSSingleObjectArrayI);
     for (NSUInteger i = 0; i < cnt; i++) {
         id obj = objects[i];
         if (!obj) {
-            MJYPAssert(obj, ([NSString stringWithFormat:@"attempt to insert nil object from objects[%lu]", (unsigned long)i]));
+            NSAssert(obj, ([NSString stringWithFormat:@"attempt to insert nil object from objects[%lu]", (unsigned long)i]));
             continue;
         }
         safeObjects[j] = obj;
@@ -88,8 +87,8 @@ ArrayObjectAtIndexProtect(__NSSingleObjectArrayI);
 }
 
 - (void)mjyp_insertObject:(id)anObject atIndex:(NSUInteger)index {
-    MJYPAssert(anObject, @"object cannot be nil");
-    MJYPAssert(index <= [self count], ([NSString stringWithFormat:@"index %lu beyond bounds [0...%lu]", (unsigned long)index, (unsigned long)[self count] -1]));
+    NSAssert(anObject, @"object cannot be nil");
+    NSAssert(index <= [self count], ([NSString stringWithFormat:@"index %lu beyond bounds [0...%lu]", (unsigned long)index, (unsigned long)[self count] -1]));
     
     if (anObject && index <= self.count) {
         [self mjyp_insertObject:anObject atIndex:index];
@@ -97,7 +96,7 @@ ArrayObjectAtIndexProtect(__NSSingleObjectArrayI);
 }
 
 - (void)mjyp_addObject:(id)anObject {
-    MJYPAssert(anObject,  @"object cannot be nil");
+    NSAssert(anObject,  @"object cannot be nil");
     
     if (anObject) {
         [self mjyp_addObject:anObject];
@@ -105,9 +104,9 @@ ArrayObjectAtIndexProtect(__NSSingleObjectArrayI);
 }
 
 - (void)mjyp_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject {
-    MJYPAssert(anObject, @"object cannot be nil");
-    MJYPAssert([self count] > 0, ([NSString stringWithFormat:@"index %lu beyond bounds for empty array", (unsigned long)index]));
-    MJYPAssert(index < [self count], ([NSString stringWithFormat:@"index %lu beyond bounds [0...%lu]", (unsigned long)index, (unsigned long)[self count] - 1]));
+    NSAssert(anObject, @"object cannot be nil");
+    NSAssert([self count] > 0, ([NSString stringWithFormat:@"index %lu beyond bounds for empty array", (unsigned long)index]));
+    NSAssert(index < [self count], ([NSString stringWithFormat:@"index %lu beyond bounds [0...%lu]", (unsigned long)index, (unsigned long)[self count] - 1]));
     
     if (anObject && index < [self count]) {
         [self mjyp_replaceObjectAtIndex:index withObject:anObject];
@@ -115,8 +114,8 @@ ArrayObjectAtIndexProtect(__NSSingleObjectArrayI);
 }
 
 - (void)mjyp_removeObjectAtIndex:(NSUInteger)index {
-    MJYPAssert([self count] > 0, ([NSString stringWithFormat:@"index %lu beyond bounds for empty array", (unsigned long)index]));
-    MJYPAssert(index < [self count], ([NSString stringWithFormat:@"index %lu beyond bounds [0...%lu]", (unsigned long)index, (unsigned long)[self count] - 1]));
+    NSAssert([self count] > 0, ([NSString stringWithFormat:@"index %lu beyond bounds for empty array", (unsigned long)index]));
+    NSAssert(index < [self count], ([NSString stringWithFormat:@"index %lu beyond bounds [0...%lu]", (unsigned long)index, (unsigned long)[self count] - 1]));
     
     if (index < [self count]) {
         [self mjyp_removeObjectAtIndex:index];
