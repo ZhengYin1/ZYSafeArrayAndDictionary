@@ -31,6 +31,14 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'ZYSafeArrayAndDictionary/Classes/**/*'
+  #non_arc_files = 'ZYSafeArrayAndDictionary/Classes/*'
+    #s.exclude_files = non_arc_files
+    #s.subspec 'no-arc' do |sna|
+    #sna.requires_arc = false
+    #sna.source_files = non_arc_files
+    #end
+  s.requires_arc = false
+  s.requires_arc = ['ZYSafeArrayAndDictionary/Classes/NSDictionary+SafeUtils.m','ZYSafeArrayAndDictionary/Classes/NSArray+SafeUtils.m']
   
   # s.resource_bundles = {
   #   'ZYSafeArrayAndDictionary' => ['ZYSafeArrayAndDictionary/Assets/*.png']
