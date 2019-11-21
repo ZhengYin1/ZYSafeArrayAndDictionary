@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ZYSafeArrayAndDictionary'
-  s.version          = '0.2.0'
+  s.version          = '0.3.0'
   s.summary          = 'Safe Array And Dictionary.'
 
 # This description is used to generate tags and improve search results.
@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
     #sna.source_files = non_arc_files
     #end
   s.requires_arc = false
-  s.requires_arc = ['ZYSafeArrayAndDictionary/Classes/NSDictionary+SafeUtils.m','ZYSafeArrayAndDictionary/Classes/NSArray+SafeUtils.m']
+  s.requires_arc = ['ZYSafeArrayAndDictionary/Classes/NSObject+SafeSwizzle.m']
   
   # s.resource_bundles = {
   #   'ZYSafeArrayAndDictionary' => ['ZYSafeArrayAndDictionary/Assets/*.png']
