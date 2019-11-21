@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ZYSafeArrayAndDictionary'
-  s.version          = '0.5.0'
+  s.version          = '0.6.0'
   s.summary          = 'Safe Array And Dictionary.'
 
 # This description is used to generate tags and improve search results.
